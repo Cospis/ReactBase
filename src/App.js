@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import { Button } from "react-bootstrap";
+import "./App.css";
+import { CustomText } from "./components/CustomText";
+import CustomButton from "./components/CustomButton";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CustomText
+        fontFamily={"Poppins"}
+        fontSize={40}
+        fontWeight={700}
+        textClassName="text-black"
+        text={"Queue Updates"}
+        cNColor="primary"
+      />
+      <CustomButton
+        variant="danger"
+        type="submit"
+        // onClick={markAsClosed}
+        text="Mark as Closed"
+        disabled={true}
+        // loading={}
+      />
     </div>
   );
 }
