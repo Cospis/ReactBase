@@ -1,10 +1,24 @@
-import logo from "./logo.svg";
-import { Button } from "react-bootstrap";
-import "./App.css";
 import { CustomText } from "./components/CustomText";
 import CustomButton from "./components/CustomButton";
-
+import { useDispatch } from "react-redux";
+// import { setCredentials } from "./redux/authSlice";
+import { setCredentials } from "./redux/features/auth/authSlice";
 function App() {
+  const dispatch = useDispatch();
+  const testRedux = () => {
+    dispatch(
+      setCredentials({
+        user: {
+          firstName: "res?.data?.data",
+          lastName: "res?.data?.data",
+          email: "authValues?.email",
+          password: "authValues?.password",
+        },
+        token: "res?.data?.data?.token",
+        // adminStatus: response.data.data.adminStatus,
+      })
+    );
+  };
   return (
     <div className="App">
       <CustomText
@@ -18,9 +32,9 @@ function App() {
       <CustomButton
         variant="danger"
         type="submit"
-        // onClick={markAsClosed}
+        onClick={testRedux}
         text="Mark as Closed"
-        disabled={true}
+        disabled={false}
         // loading={}
       />
     </div>
