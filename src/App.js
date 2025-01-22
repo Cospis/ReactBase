@@ -1,43 +1,38 @@
 import { CustomText } from "./components/CustomText";
 import CustomButton from "./components/CustomButton";
 import { useDispatch } from "react-redux";
+import AllRoutes from "./routes/AllRoutes";
 // import { setCredentials } from "./redux/authSlice";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
 import { setCredentials } from "./redux/features/auth/authSlice";
+import { useEffect } from "react";
+import WebFont from "webfontloader";
 function App() {
-  const dispatch = useDispatch();
-  const testRedux = () => {
-    dispatch(
-      setCredentials({
-        user: {
-          firstName: "res?.data?.data",
-          lastName: "res?.data?.data",
-          email: "authValues?.email",
-          password: "authValues?.password",
-        },
-        token: "res?.data?.data?.token",
-        // adminStatus: response.data.data.adminStatus,
-      })
-    );
-  };
+  let persistor = persistStore(store);
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Montserrat", "Poppins"],
+      },
+    });
+  }, []);
   return (
-    <div className="App">
-      <CustomText
-        fontFamily={"Poppins"}
-        fontSize={40}
-        fontWeight={700}
-        textClassName="text-black"
-        text={"Queue Updates"}
-        cNColor="primary"
-      />
-      <CustomButton
-        variant="danger"
-        type="submit"
-        onClick={testRedux}
-        text="Mark as Closed"
-        disabled={false}
-        // loading={}
-      />
-    </div>
+    // <div className="App">
+
+    // </div>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <div className="App">
+            <AllRoutes />
+          </div>
+        </Router>
+      </PersistGate>
+    </Provider>
   );
 }
 
